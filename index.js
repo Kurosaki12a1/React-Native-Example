@@ -16,7 +16,8 @@
 //AppRegistry.registerComponent('LearnReactNative', () => Header);
 
 import { AppRegistry } from 'react-native';
-import AppReactNative from './src/AppReactNative'
+import AppReactNative from './src/AppReactNative';
+AppRegistry.registerComponent('LearnReactNative', () => AppReactNative);
 //import AlbumList from './src/mycomponent/AlbumList';
 //import Header from './src/mycomponent/Header';
 /*
@@ -27,7 +28,7 @@ const App = () => (
     </View>
 );
 */
-AppRegistry.registerComponent('LearnReactNative', () => AppReactNative);
+
 
  //import { AppRegistry } from 'react-native';
  //import LotsOfGreetings from './src/example/props/LotsOfGreetings';

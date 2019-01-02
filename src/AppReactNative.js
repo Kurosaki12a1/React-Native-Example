@@ -1,9 +1,44 @@
-import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+/*
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
 import Header from './components/common/Header';
 import firebase from 'firebase';
+*/
 import LoginForm from "./components/LoginForm";
+import { SwitchNavigator, createStackNavigator } from 'react-navigation';
+import MainScreen from './components/common/MainScreen';
+/*
+const AppReactNative = SwitchNavigator(
+    {
+        LoginForm,
+        MainScreen
+    },
+    {
+        initialRouteName: 'LoginForm'
+    }
 
+)
+*/
+
+const AppReactNative = createStackNavigator({
+    Screen_LoginForm: {
+        screen: LoginForm,
+        navigationOptions: {
+            header: null
+        }
+    },
+
+    Screen_MainScreen: {
+        screen: MainScreen,
+        navigationOptions: {
+            header: null
+        }
+    }
+})
+
+export default AppReactNative;
+
+/*
 export default class AppReactNative extends Component {
     componentWillMount() {
         firebase.initializeApp({
@@ -20,10 +55,11 @@ export default class AppReactNative extends Component {
     render() {
         return (
             <View>
-                <Header headerText={"Authentication"}/>
-                <LoginForm/>
+                <Header headerText={"Authentication"} />
+                <LoginForm />
 
             </View>
         );
     }
 }
+*/
