@@ -7,7 +7,7 @@ import firebase from 'firebase';
 import Header from './common/Header';
 
 export default class LoginForm extends React.Component {
-    state = { email: '', password: '', errorMessage: null }
+    state = { email: 'test@gmail.com', password: '123456', errorMessage: null }
 
     componentWillMount() {
         firebase.initializeApp({
