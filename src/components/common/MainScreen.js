@@ -13,7 +13,7 @@ export default class MainScreen extends React.Component {
 
 
   componentWillMount() {
-    axios.get('https://randomuser.me/api/?inc=gender,nat,picture,name&results=10')
+    axios.get('https://randomuser.me/api/?inc=gender,nat,picture,name,phone&results=10')
       .then(response => this.setState({ listUser: response.data }));
 
 
@@ -27,42 +27,38 @@ export default class MainScreen extends React.Component {
 
   componentDidMount() {
 
-/*
-    this.setState({
-      title: "Hi" + this.state.currentUser + " && " + this.state.currentUser.email + "!"
-    })
-*/
+    /*
+        this.setState({
+          title: "Hi" + this.state.currentUser + " && " + this.state.currentUser.email + "!"
+        })
+    */
   }
 
   _renderItem = ({ item }) => {
-    console.log(item.name.last)
     return (
       <User
         image={item.picture.large}
-     
+        text={item.name.last}
       />
-      
+
     );
   }
 
   render() {
     console.log(this.state.listUser.results);
     return (
-      <Card>
-        <Header headerText={"List Random User"} />
-        <CardSection>
-          <View>
-            <FlatList
-              style={{ flex: 1 }}
-              horizontal={true}
-              data={this.state.listUser.results}
-              renderItem={this._renderItem.bind(this)}
-              keyExtractor={item => item.name.last}
-            />
-          </View>
-        </CardSection>
+      <View style={styles.fullbg}>
+       <Header headerText={"List Random User"} />
         
-      </Card>
+        <View >
+          <FlatList
+            horizontal={false}
+            data={this.state.listUser.results}
+            renderItem={this._renderItem.bind(this)}
+            keyExtractor={item => item.phone}
+          />
+        </View>
+      </View>
     );
   }
 }
@@ -76,9 +72,18 @@ export default class MainScreen extends React.Component {
         </View>
 */
 const styles = StyleSheet.create({
+  fullbg:{
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    flex:1
+  },
   container: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'flex-start'
+  },
+  listView: {
+
   }
 })

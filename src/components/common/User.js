@@ -10,20 +10,30 @@ export default class User extends Component {
 
     render() {
         return (
-            <Card>
-                <CardSecton>
-                    <Image
-                        style={styles.imgParentalStyle}
-                        source={{ uri: this.props.image }}
-                    />
-                </CardSecton>
-
-            </Card>
+            <View style={styles.container}>
+                <Image
+                    style={styles.avatar}
+                    source={{ uri: this.props.image }}
+                />
+                <Text>
+                    {this.props.text}
+                </Text>
+            </View>
         );
     }
 }
 
 const styles = {
+    container: {
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
+        borderRadius:10,
+        borderWidth:0.5,
+        borderColor:'#000000',
+        margin:10
+    },
+
     headerContentStyle: {
         flexDirection: 'column',
         justifyContent: 'space-around'
@@ -46,9 +56,8 @@ const styles = {
         marginLeft: 10,
         marginRight: 10
     },
-    imgParentalStyle: {
-        position: "absolute",
-        top: 5,
-        left: 5,
+    avatar: {
+        width: 100, height: 100,
+        margin:10
     }
 }
