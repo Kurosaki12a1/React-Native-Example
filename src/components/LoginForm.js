@@ -3,7 +3,7 @@ import { View, TextInput, StyleSheet, Text } from 'react-native';
 import Button from './common/Button';
 import Card from './common/Card';
 import CardSection from './common/CardSection';
-import firebase from 'firebase';
+import firebase from '@firebase/app';
 import Header from './common/Header';
 
 export default class LoginForm extends React.Component {

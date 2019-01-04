@@ -10,7 +10,8 @@
     "axios": "^0.18.0",
     "firebase": "^5.7.2",
     "react": "16.3.1",
-    "react-native": "^0.55.4"
+    "react-native": "^0.55.4",
+    "rn-viewpager": "^1.2.9"
   },
   "devDependencies": {
     "babel-jest": "23.4.2",

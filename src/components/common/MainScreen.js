@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, Platform, Image, Text, View, FlatList } from 'react-native';
 import firebase from 'firebase';
 import axios from 'axios';
-import CardSection from './CardSection';
-import Card from './Card';
 import Header from './Header';
 import User from './User';
 
@@ -25,14 +23,8 @@ export default class MainScreen extends React.Component {
 
   }
 
-  componentDidMount() {
 
-    /*
-        this.setState({
-          title: "Hi" + this.state.currentUser + " && " + this.state.currentUser.email + "!"
-        })
-    */
-  }
+
 
   _renderItem = ({ item }) => {
     return (
@@ -43,25 +35,25 @@ export default class MainScreen extends React.Component {
 
     );
   }
-
+  //  <Header headerText={"List Random User"} />
   render() {
-    console.log(this.state.listUser.results);
+
     return (
-      <View style={styles.fullbg}>
-       <Header headerText={"List Random User"} />
-        
-        <View >
-          <FlatList
-            horizontal={false}
-            data={this.state.listUser.results}
-            renderItem={this._renderItem.bind(this)}
-            keyExtractor={item => item.phone}
-          />
-        </View>
+      <View style={styles.viewimg}>
+        <Header headerText={"Test"}/>
+
+        <FlatList
+          horizontal={false}
+          data={this.state.listUser.results}
+          renderItem={this._renderItem.bind(this)}
+          keyExtractor={item => item.phone}
+        />
+     
       </View>
     );
   }
 }
+
 // Hi {currentUser && currentUser.email}!
 //   const { currentUser  } = this.state
 /*
@@ -72,10 +64,11 @@ export default class MainScreen extends React.Component {
         </View>
 */
 const styles = StyleSheet.create({
-  fullbg:{
+  fullbg: {
     flexDirection: 'column',
     alignItems: 'stretch',
-    flex:1
+    flex: 1,
+    backgroundColor: 'green'
   },
   container: {
     flex: 1,
@@ -85,5 +78,15 @@ const styles = StyleSheet.create({
   },
   listView: {
 
-  }
+  },
+  viewimg: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    flex: 1
+  },
 })
