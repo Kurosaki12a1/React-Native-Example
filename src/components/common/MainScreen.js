@@ -4,15 +4,21 @@ import firebase from 'firebase';
 import axios from 'axios';
 import Header from './Header';
 import User from './User';
-
+import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
 export default class MainScreen extends React.Component {
-  state = { currentUser: null, listUser: [], title: 'Nothing' }
+  state = { currentUser: null, listUser: [], title: 'Nothing', listUser1: [], listUser2: [] }
 
 
 
   componentWillMount() {
     axios.get('https://randomuser.me/api/?inc=gender,nat,picture,name,phone&results=10')
       .then(response => this.setState({ listUser: response.data }));
+    axios.get('https://randomuser.me/api/?inc=gender,nat,picture,name,phone&results=10')
+      .then(response => this.setState({ listUser1: response.data }));
+
+    axios.get('https://randomuser.me/api/?inc=gender,nat,picture,name,phone&results=10')
+      .then(response => this.setState({ listUser2: response.data }));
+
 
 
     const { currentUserLogin } = firebase.auth()
@@ -24,7 +30,27 @@ export default class MainScreen extends React.Component {
   }
 
 
+  _renderTitleIndicator() {
+    return <PagerTitleIndicator titles={['one', 'two', 'three']} />;
+  }
 
+  _renderDotIndicator() {
+    return <PagerDotIndicator pageCount={3} />;
+  }
+
+  _renderTabIndicator() {
+    let tabs = [{
+      text: 'Home',
+
+    }, {
+      text: 'Message',
+
+    }, {
+      text: 'Profile',
+
+    }];
+    return <PagerTabIndicator tabs={tabs} />;
+  }
 
   _renderItem = ({ item }) => {
     return (
@@ -40,15 +66,37 @@ export default class MainScreen extends React.Component {
 
     return (
       <View style={styles.viewimg}>
-        <Header headerText={"Test"}/>
+        <Header headerText={"Test"} />
+        <IndicatorViewPager
+          style={{height:'100%'}}
+          indicator={this._renderDotIndicator()}
+        >
+        <View>
+          <FlatList
+            horizontal={false}
+            data={this.state.listUser.results}
+            renderItem={this._renderItem.bind(this)}
+            keyExtractor={item => item.phone}
+          />
+          </View>
+          <View>
+          <FlatList
+            horizontal={false}
+            data={this.state.listUser1.results}
+            renderItem={this._renderItem.bind(this)}
+            keyExtractor={item => item.phone}
+          />
+          </View>
+          <View>
+          <FlatList
+            horizontal={false}
+            data={this.state.listUser2.results}
+            renderItem={this._renderItem.bind(this)}
+            keyExtractor={item => item.phone}
+          />
+          </View>
+        </IndicatorViewPager>
 
-        <FlatList
-          horizontal={false}
-          data={this.state.listUser.results}
-          renderItem={this._renderItem.bind(this)}
-          keyExtractor={item => item.phone}
-        />
-     
       </View>
     );
   }
