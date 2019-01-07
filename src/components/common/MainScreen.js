@@ -3,6 +3,7 @@ import { StyleSheet, Platform, Image, Text, View, FlatList } from 'react-native'
 import firebase from 'firebase';
 import axios from 'axios';
 import Header from './Header';
+import Home from './Home';
 import User from './User';
 import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
 export default class MainScreen extends React.Component {
@@ -49,7 +50,12 @@ export default class MainScreen extends React.Component {
       text: 'Profile',
 
     }];
-    return <PagerTabIndicator tabs={tabs} />;
+
+
+    return <PagerTabIndicator
+       tabs={tabs} 
+       changePageWithAnimation = {true}
+    />;
   }
 
   _renderItem = ({ item }) => {
@@ -61,23 +67,16 @@ export default class MainScreen extends React.Component {
 
     );
   }
-  //  <Header headerText={"List Random User"} />
   render() {
 
     return (
       <View style={styles.viewimg}>
-        <Header headerText={"Test"} />
         <IndicatorViewPager
-          style={{height:'100%'}}
-          indicator={this._renderDotIndicator()}
+        style={{flex:1, paddingTop:20, backgroundColor:'white'}}
+          indicator={this._renderTabIndicator()}
         >
         <View>
-          <FlatList
-            horizontal={false}
-            data={this.state.listUser.results}
-            renderItem={this._renderItem.bind(this)}
-            keyExtractor={item => item.phone}
-          />
+          <Home/>
           </View>
           <View>
           <FlatList

@@ -2,9 +2,13 @@ import { Dimensions, Image, ImageBackground, StyleSheet, Text, TouchableOpacity,
 import React, { Component } from 'react';
 
 export default class User extends Component {
+
+    state ={ imageUrl : null}
+    
     constructor(props) {
         super(props)
-
+        let imgUrl = props.image ? {uri : this.props.image} :  require('../picture/company_logo.png');
+        this.state = { imageUrl : imgUrl}
     }
 
     render() {
@@ -12,9 +16,9 @@ export default class User extends Component {
             <View style={styles.container}>
                 <Image
                     style={styles.avatar}
-                    source={{ uri: this.props.image }}
+                    source={this.state.imageUrl}
                 />
-                <Text>
+                <Text style={styles.textStyle}>
                     {this.props.text}
                 </Text>
             </View>
@@ -35,6 +39,12 @@ const styles = {
     },
     avatar: {
         width: 100, height: 100,
-        margin: 10
+        margin: 10,
+        resizeMode :  'contain'
+    },
+    textStyle: {
+        fontSize: 14,
+        marginLeft : 10,
+        color : 'red'
     }
 }
